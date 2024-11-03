@@ -4,6 +4,8 @@ import { fetchBudget } from "../../utils/budget-utils";
 
 const Budget = () => {
   const { budget, setBudget } = useContext(AppContext);
+  const [isEditing, setIsEditing] = useState(false);
+  const [newBudget, setNewBudget] = useState(budget);
 
   // Fetch expenses on component mount
   useEffect(() => {
@@ -20,23 +22,14 @@ const Budget = () => {
     }
   };
 
-  // return (
-  //   <div className="alert alert-secondary p-3 d-flex align-items-center justify-content-between">
-  //     <div>Budget: ${budget}</div>
-  //   </div>
-  // );
-
-  const [isEditing, setIsEditing] = useState(false);
-  const [newBudget, setNewBudget] = useState(budget);
-
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
   const handleSaveClick = () => {
-    setBudget(newBudget);  // Update the displayed budget
-    setIsEditing(false);    // Exit edit mode
-  };
+    setBudget(newBudget);
+    setIsEditing(false);
+  }
 
   const handleInputChange = (e: any) => {
     setNewBudget(e.target.value);
